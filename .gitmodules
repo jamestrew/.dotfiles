@@ -1,7 +1,8 @@
-[submodule ".config/nvim"]
-    path = nvim/.config/nvim
-    url = git@github.com:trewjames/nvim.git
+[submodule "nvim"]
+    path = .config/nvim
+    url = git@github.com:jamestrew/nvim.git
 
-[submodule ".config/tmux/plugins/tpm"]
-    path = tmux/plugins/tpm
+[submodule "tmux-tpm"]
+    path = .config/tmux/plugins/tpm
     url = https://github.com/tmux-plugins/tpm
+
