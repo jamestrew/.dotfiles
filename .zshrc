@@ -3,11 +3,11 @@ export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/
 export CDPATH=$HOME/.local/share/nvim/:$CDPATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
+# export ZSH="~/.oh-my-zsh"
 plugins=(
     git
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+    # zsh-autosuggestions
+    # zsh-syntax-highlighting
     # fzf
 )
 

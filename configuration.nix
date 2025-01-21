@@ -61,6 +61,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     neovim
     wget
+    nix-index
     zsh
     curl
     firefox
@@ -72,9 +73,11 @@
     ripgrep
     fd
     tree
+    sqlite
 
     gcc
     clang
+    gnumake
 
     discord
     flameshot
@@ -106,16 +109,25 @@
     delta
     starship
     atuin
-    oh-my-zsh
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    oh-my-zsh
+    # oh-my-zsh
+    # zsh-autosuggestions
+    # zsh-syntax-highlighting
     docker
     screenkey
     peek
     jetbrains-mono
     nerd-fonts.jetbrains-mono
+
+    lua-language-server
+    stylua
+    nil # nix language server
+    basedpyright
+    gopls
   ];
+
+  environment.variables = {
+    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -125,7 +137,17 @@
   #   enableSSHSupport = true;
   # };
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    ohMyZsh = {
+      enable = true;
+      plugins = [
+        "git"
+      ];
+    };
+  };
 
   # List services that you want to enable:
 
