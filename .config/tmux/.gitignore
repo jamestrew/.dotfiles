@@ -1,3 +1,4 @@
+plugins/tpm
 plugins/tmux-fzf
 plugins/tmux-logging
 plugins/tmux-onedark-theme
