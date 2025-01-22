@@ -13,7 +13,7 @@ CTRL = "control"
 TAB = "Tab"
 SPACE = "space"
 
-TERMINAL: str = guess_terminal("kitty") # type: ignore
+TERMINAL: str = guess_terminal("ghostty") # type: ignore
 BROWSER: str = "firefox"
 
 
