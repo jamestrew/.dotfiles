@@ -69,12 +69,12 @@ keys: list[Union[Key, KeyChord]] = [
     # programs
     EzKey(
         "M-p",
-        lazy.spawn("dmenu_run -c -l 20 -fn 'JetBrains Mono-16'"),
-        desc="Run dmenu",
+        lazy.spawn("rofi -show run"),
+        desc="Run rofi",
     ),
     EzKey(
         "M-v",
-        lazy.spawn("clipmenu -c -l 20 -fn 'JetBrains Mono-16'"),
+        lazy.spawn("clipmenu"),
         desc="Open clipmenu",
     ),
     KeyChord(

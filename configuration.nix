@@ -59,7 +59,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
     wget
     nix-index
     zsh
@@ -78,6 +77,10 @@
     gcc
     clang
     gnumake
+    cmake
+    gettext
+    ninja
+    ccache
 
     discord
     flameshot
@@ -85,6 +88,7 @@
     yazi
     htop
     ghostty
+    kitty
     zathura
     xclip
     nodePackages.npm
@@ -109,24 +113,37 @@
     delta
     starship
     atuin
-    # oh-my-zsh
-    # zsh-autosuggestions
-    # zsh-syntax-highlighting
+    rofi
+    clipmenu
     docker
     screenkey
     peek
-    jetbrains-mono
-    nerd-fonts.jetbrains-mono
 
     lua-language-server
+    bash-language-server
     stylua
     nil # nix language server
     basedpyright
     gopls
+    libclang
+    deno
+    emmet-language-server
+    markdownlint-cli
+    taplo
+    biome
   ];
 
   environment.variables = {
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
+    CM_LAUNCHER = "rofi";
+  };
+
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      jetbrains-mono
+      nerd-fonts.jetbrains-mono
+    ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -150,6 +167,7 @@
   };
 
   # List services that you want to enable:
+  services.clipmenu.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
