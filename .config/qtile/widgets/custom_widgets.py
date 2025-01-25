@@ -1,7 +1,6 @@
-import subprocess
-
 from libqtile import bar, qtile
-from libqtile.widget.base import InLoopPollText, _TextBox
+from libqtile.log_utils import logger
+from libqtile.widget.base import _TextBox
 from libqtile.widget.cpu import CPU
 from libqtile.widget.groupbox import GroupBox
 from libqtile.widget.memory import Memory
@@ -10,17 +9,13 @@ from libqtile.widget.open_weather import (
     OpenWeatherResponseError,
     _OpenWeatherResponseParser,
 )
-
-# from libqtile.widget.pulse_volume import PulseVolume
+from libqtile.widget.pulse_volume import PulseVolume
 from libqtile.widget.sep import Sep
 
 from colors import OneDark as c
 
-from libqtile.log_utils import logger
-
 __all__ = [
     "group_box",
-    "spotify",
     "weather",
     "line_sep",
     "basic_sep",
@@ -80,20 +75,6 @@ class CustomWeather(OpenWeather):
         return self.format.format(**data)
 
 
-class Spotify(InLoopPollText):
-    def __init__(self, default_text="N/A", width=bar.CALCULATED, **config):
-        super().__init__(default_text=default_text, width=width, **config)
-        self.update_interval = 3
-        self.add_callbacks(
-            {"Button1": lambda: qtile.cmd_spawn("playerctl -p spotify play-pause")}
-        )
-
-    def poll(self):
-        script_dir = "/home/jt/.config/qtile/scripts/music.sh"
-        out = subprocess.run([script_dir, "/dev/null"], capture_output=True)
-        return out.stdout.decode("utf-8").strip() or "N/A"
-
-
 basic_sep = Sep(foreground=c.base00, linewidth=4)
 line_sep = Sep(foreground=c.base05, linewidth=1, padding=10)
 
@@ -135,7 +116,7 @@ speaker_on = True
 def toggle_speaker():
     global speaker_on
     logger.debug(f"toggle_speaker: {speaker_on=}")
-    qtile.cmd_spawn("amixer set PCM toggle")
+    qtile.spawn("amixer set PCM toggle")
     speaker_on = not speaker_on
 
 
@@ -144,18 +125,17 @@ audio = (
         foreground=c.base0D,
         mouse_callbacks={
             "Button1": toggle_speaker,
-            "Button3": lambda: qtile.cmd_spawn("pavucontrol"),
-            "Button4": lambda: qtile.cmd_spawn("amixer set PCM 1%+ unmute"),
-            "Button5": lambda: qtile.cmd_spawn("amixer set PCM 1%- unmute"),
+            "Button3": lambda: qtile.spawn("pavucontrol"),
+            "Button4": lambda: qtile.spawn("amixer set PCM 1%+ unmute"),
+            "Button5": lambda: qtile.spawn("amixer set PCM 1%- unmute"),
         },
         text="󰕾" if speaker_on else "󰖁",
     ),
-    # PulseVolume(
-    #     foreground=c.base0D, update_interval=0.1, volume_app="pavucontrol", step=1
-    # ),
+    PulseVolume(
+        foreground=c.base0D, update_interval=0.1, volume_app="pavucontrol", step=1
+    ),
 )
 
-spotify = (Icon(foreground=c.base08, text="󰓇"), Spotify(foreground=c.base08))
 
 weather = CustomWeather(
     cityid=6167865,

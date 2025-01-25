@@ -1,5 +1,3 @@
-from typing import Union
-
 from libqtile.config import EzKey, Key, KeyChord
 from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
@@ -13,7 +11,7 @@ CTRL = "control"
 TAB = "Tab"
 SPACE = "space"
 
-TERMINAL: str = guess_terminal("ghostty")  # type: ignore
+TERMINAL: str = guess_terminal("ghostty")  # pyright: ignore[reportAssignmentType]
 BROWSER: str = "firefox"
 
 
@@ -28,7 +26,7 @@ def kill_all(qtile: Qtile):
             qtile.windows_map[int(window_id)].kill()
 
 
-keys: list[Union[Key, KeyChord]] = [
+keys: list[Key | KeyChord] = [
     # QTILE
     EzKey("M-S-r", lazy.restart(), desc="Restart Qtile"),
     EzKey("M-S-q", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -85,7 +83,6 @@ keys: list[Union[Key, KeyChord]] = [
             Key([], "r", lazy.spawn(TERMINAL + " -e yazi"), desc="Open yazi"),
             Key([], "b", lazy.spawn(BROWSER), desc="Open browser"),
             Key([], "d", lazy.spawn("discord"), desc="Open discord"),
-            Key([], "s", lazy.spawn("spotify"), desc="Open spotify"),
             Key([], "o", lazy.spawn("obsidian"), desc="Open obsidian"),
         ],
     ),

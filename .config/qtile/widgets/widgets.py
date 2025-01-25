@@ -1,12 +1,15 @@
 from libqtile import bar
-from libqtile.widget.base import _Widget as Widget  # pyright: ignore[reportPrivateUsage]
+from libqtile.widget.base import (
+    _Widget as Widget,  # pyright: ignore[reportPrivateUsage]
+)
 from libqtile.widget.clock import Clock
 from libqtile.widget.currentlayout import CurrentLayout
 from libqtile.widget.pomodoro import Pomodoro
-from libqtile.widget.systray import Systray
 from libqtile.widget.statusnotifier import StatusNotifier
+from libqtile.widget.systray import Systray
 from libqtile.widget.windowname import WindowName
 
+from colors import OneDark as c
 from widgets.custom_widgets import (
     audio,
     basic_sep,
@@ -14,10 +17,8 @@ from widgets.custom_widgets import (
     group_box,
     line_sep,
     ram,
-    spotify,
     weather,
 )
-from colors import OneDark as c
 
 
 def status_bar(widgets: list[Widget]) -> bar.Bar:
@@ -51,8 +52,6 @@ main_screen_widgets: list[Widget] = [
         prefix_break="Pomo - Break ",
         prefix_long_break="Pomo - Long Break ",
     ),
-    line_sep,
-    *spotify,
     line_sep,
     weather,
     line_sep,
