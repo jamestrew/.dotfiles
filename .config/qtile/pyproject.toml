@@ -1,0 +1,15 @@
+[project]
+name = "qtile"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = []
+
+[tool.pyright]
+extraPaths = [
+  "/nix/store/gmqyiy8zw621gbk7k2rwyahp7l0mcdph-python3.12-qtile-0.29.0/lib/python3.12/site-packages",
+]

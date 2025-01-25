@@ -1,5 +1,5 @@
 from libqtile import bar
-from libqtile.widget.base import _Widget
+from libqtile.widget.base import _Widget as Widget  # pyright: ignore[reportPrivateUsage]
 from libqtile.widget.clock import Clock
 from libqtile.widget.currentlayout import CurrentLayout
 from libqtile.widget.pomodoro import Pomodoro
@@ -7,7 +7,7 @@ from libqtile.widget.systray import Systray
 from libqtile.widget.statusnotifier import StatusNotifier
 from libqtile.widget.windowname import WindowName
 
-from _widgets.custom_widgets import (
+from widgets.custom_widgets import (
     audio,
     basic_sep,
     cpu,
@@ -20,7 +20,7 @@ from _widgets.custom_widgets import (
 from colors import OneDark as c
 
 
-def status_bar(widgets: list[_Widget]) -> bar.Bar:
+def status_bar(widgets: list[Widget]) -> bar.Bar:
     return bar.Bar(widgets, size=24, opacity=1)
 
 
@@ -31,7 +31,7 @@ widget_defaults = dict(
     padding=1,
 )
 
-main_screen_widgets = [
+main_screen_widgets: list[Widget] = [
     basic_sep,
     group_box(),
     line_sep,
@@ -73,7 +73,7 @@ main_screen_widgets = [
     basic_sep,
 ]
 
-sec_screen_widgets = [
+sec_screen_widgets: list[Widget] = [
     basic_sep,
     group_box(),
     line_sep,

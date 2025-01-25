@@ -1,11 +1,11 @@
-import _groups as Groups
-import _keys as Keys
-import _layouts as Layouts
-import _mouse as Mouse
-import _widgets as Widgets
-import hooks
-
 from libqtile.config import Screen
+
+import groups as Groups
+import hooks as _  # noqa: F401
+import keys as Keys
+import layouts as Layouts
+import mouse as Mouse
+import widgets as Widgets
 
 keys = Keys.keys
 groups = Groups.groups
