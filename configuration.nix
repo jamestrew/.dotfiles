@@ -73,6 +73,7 @@
     fd
     tree
     sqlite
+    nh
 
     gcc
     clang
@@ -96,10 +97,6 @@
     yarn
     openssh
     stow
-    openssh
-    openssh
-    openssh
-    openssh
 
     picom
     psutils
@@ -131,11 +128,13 @@
     markdownlint-cli
     taplo
     biome
+    vscode-langservers-extracted
   ];
 
   environment.variables = {
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
     CM_LAUNCHER = "rofi";
+    FLAKE = "/home/jt/.dotfiles";
   };
 
   fonts = {
