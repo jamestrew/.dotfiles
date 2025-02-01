@@ -1,1 +1,5 @@
 @theme "Arc-Dark"
+
+window {
+  width: 20%;
+}
