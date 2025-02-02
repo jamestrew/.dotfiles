@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -80,7 +81,7 @@
     isNormalUser = true;
     description = "James Trew";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
 
@@ -153,6 +154,7 @@
     bash-language-server
     stylua
     nil # nix language server
+    nixpkgs-fmt
     basedpyright
     gopls
     libclang
@@ -217,6 +219,8 @@
       options = [ "defaults" ];
     };
   };
+
+  documentation.man.generateCaches = true; # for apropos
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
