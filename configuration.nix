@@ -5,11 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub = {
@@ -81,7 +80,11 @@
   users.users.jt = {
     isNormalUser = true;
     description = "James Trew";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
@@ -140,7 +143,6 @@
     pavucontrol
     alsa-utils
 
-
     gimp
     go
     ruff
@@ -158,7 +160,7 @@
     bash-language-server
     stylua
     nil # nix language server
-    nixpkgs-fmt
+    nixfmt-rfc-style
     basedpyright
     gopls
     libclang
@@ -197,12 +199,6 @@
       enable = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
-      ohMyZsh = {
-        enable = true;
-        plugins = [
-          "git"
-        ];
-      };
     };
 
     direnv.enable = true;
@@ -215,7 +211,10 @@
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
-  services.udev.packages = with pkgs; [ vial via ];
+  services.udev.packages = with pkgs; [
+    vial
+    via
+  ];
   services.playerctld.enable = true;
 
   fileSystems = {
@@ -245,7 +244,10 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   system.autoUpgrade.enable = true;
   system.autoUpgrade.dates = "weekly";

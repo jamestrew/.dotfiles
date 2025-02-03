@@ -3,7 +3,8 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
   };
-  outputs = { self, nixpkgs, ... }:
+  outputs =
+    { self, nixpkgs, ... }:
     let
       lib = nixpkgs.lib;
     in
