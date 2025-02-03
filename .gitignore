@@ -175,4 +175,3 @@ cython_debug/
 
 .config/discord/*
 !.config/discord/settings.json
-hardware-configuration.nix
