@@ -1,15 +1,16 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-format = "$directory$git_branch$git_commit$git_state$git_metrics$git_status$character"
+
+# format = "$directory$git_branch$git_commit$git_state$git_metrics$git_status$character"
 # palette = 'onedark'
 
-[character]
-success_symbol = '[❯](bold green)'
-error_symbol = '[❯](bold red)'
+# [character]
+# success_symbol = '[❯](bold green)'
+# error_symbol = '[❯](bold red)'
 
 [git_branch]
-format = '[$branch(:$remote_branch)]($style) '
+format = '[$symbol$branch(:$remote_branch)]($style) '
 style = 'green'
 
 [git_commit]
@@ -32,17 +33,17 @@ conflicted = '[~$count](red) '
 [directory]
 read_only = "󰌾 "
 format = '[$read_only]($read_only_style)[$path]($style) '
-style = 'bright-blue'
-truncate_to_repo = false
-truncation_symbol = "../"
+# style = 'bright-blue'
+# truncate_to_repo = false
+# truncation_symbol = "../"
 
 
-[palettes.onedark]
-blue = '#61afef'
-white = '#abb2bf'
-green = '#98c379'
-yellow = '#e7c787'
-red = '#e06c75'
+# [palettes.onedark]
+# blue = '#61afef'
+# white = '#abb2bf'
+# green = '#98c379'
+# yellow = '#e7c787'
+# red = '#e06c75'
 
 
 ### ICONS

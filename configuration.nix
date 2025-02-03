@@ -47,6 +47,7 @@
     '';
   };
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.tmp.cleanOnBoot = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -97,6 +98,7 @@
     zsh
     curl
     firefox
+    google-chrome # sometimes firefox is doodoo
     git
     github-cli
     tmux
@@ -131,11 +133,13 @@
     yarn
     openssh
     stow
+    vial
 
     picom
     psutils
     pavucontrol
     alsa-utils
+
 
     gimp
     go
@@ -211,6 +215,8 @@
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+  services.udev.packages = with pkgs; [ vial via ];
+  services.playerctld.enable = true;
 
   fileSystems = {
     "/mnt/moreswag" = {
@@ -220,7 +226,7 @@
     };
   };
 
-  documentation.man.generateCaches = true; # for apropos
+  # documentation.man.generateCaches = true; # for apropos
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

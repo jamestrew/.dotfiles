@@ -88,9 +88,9 @@ keys: list[Key | KeyChord] = [
     ),
     EzKey("M-S-s", lazy.spawn("flameshot gui"), desc="flameshot"),
     # special keys
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set PCM 5%+ unmute")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set PCM 5%- unmute")),
-    Key([], "XF86AudioMute", lazy.spawn("amixer set PCM toggle")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+ unmute")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%- unmute")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),

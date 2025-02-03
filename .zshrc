@@ -5,7 +5,7 @@ export CDPATH=$HOME/.local/share/nvim/:$CDPATH
 # Path to your oh-my-zsh installation.
 # export ZSH="~/.oh-my-zsh"
 plugins=(
-    git
+    # git
     # zsh-autosuggestions
     # zsh-syntax-highlighting
     # fzf
