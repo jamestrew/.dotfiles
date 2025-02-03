@@ -64,16 +64,29 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  services.xserver.enable = true;
-  services.xserver.windowManager.qtile = {
+  services.xserver = {
     enable = true;
-    extraPackages = python3Packages: with python3Packages; [ qtile-extras ];
+
+    # Configure keymap in X11
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
+
+    windowManager.qtile = {
+      enable = true;
+      extraPackages = python3Packages: with python3Packages; [ qtile-extras ];
+    };
+
+    # imwheel = {
+    #   enable = true;
+    #   rules = {
+    #     "^com\.mitchellh\.ghostty$" = ''
+    #       None, Up,   Button4, 4
+    #       None, Down, Button5, 4
+    #     '';
+    #   };
+    # };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -151,7 +164,6 @@
     starship
     atuin
     rofi
-    clipmenu
     docker
     screenkey
     peek
