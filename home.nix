@@ -31,9 +31,15 @@
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    (pkgs.writeShellScriptBin "my-hello" ''
+      echo "Hello, ${config.home.username}!"
+    '')
+
+    (pkgs.writeShellApplication {
+      name = "ta";
+      runtimeInputs = [ pkgs.tmux pkgs.fd ];
+      text = builtins.readFile ./bin/ta;
+    })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
