@@ -27,4 +27,5 @@ configuration.nix
 flake.nix
 flake.lock
 hardware-configuration.nix
+home.nix
 .ignore

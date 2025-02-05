@@ -77,16 +77,6 @@
       enable = true;
       extraPackages = python3Packages: with python3Packages; [ qtile-extras ];
     };
-
-    # imwheel = {
-    #   enable = true;
-    #   rules = {
-    #     "^com\.mitchellh\.ghostty$" = ''
-    #       None, Up,   Button4, 4
-    #       None, Down, Button5, 4
-    #     '';
-    #   };
-    # };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -111,7 +101,6 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     nix-index
-    zsh
     curl
     firefox
     google-chrome # sometimes firefox is doodoo
@@ -211,6 +200,7 @@
       enable = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
+      ohMyZsh.enable = true;
     };
 
     direnv.enable = true;
