@@ -18,10 +18,11 @@
       system = "x86_64-linux";
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${system};
+      host = "nixos";
     in
     {
       nixosConfigurations = {
-        nixos = lib.nixosSystem {
+        ${host} = lib.nixosSystem {
           inherit system;
           modules = [ ./configuration.nix ];
         };
@@ -37,5 +38,8 @@
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
       };
+
+      system = system;
+      pkgs = pkgs;
     };
 }

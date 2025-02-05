@@ -98,6 +98,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    lolcat
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     nix-index
@@ -124,7 +125,6 @@
     ccache
 
     discord
-    flameshot
     fzf
     yazi
     vlc
@@ -133,6 +133,8 @@
     kitty
     zathura
     xclip
+    xsel
+    flameshot
     nodePackages.npm
     nodePackages.nodejs
     yarn
@@ -204,6 +206,8 @@
     };
 
     direnv.enable = true;
+
+    steam.enable = true;
   };
 
   virtualisation.docker.enable = true;
@@ -218,6 +222,7 @@
     via
   ];
   services.playerctld.enable = true;
+  services.input-remapper.enable = true;
 
   fileSystems = {
     "/mnt/moreswag" = {

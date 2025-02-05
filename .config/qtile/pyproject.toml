@@ -11,5 +11,5 @@ dev = []
 
 [tool.pyright]
 extraPaths = [
-  "/nix/store/gmqyiy8zw621gbk7k2rwyahp7l0mcdph-python3.12-qtile-0.29.0/lib/python3.12/site-packages",
+  "/nix/store/4mkk6b8r7i8gawfy3w1gjy775ijcbqj7-python3.12-qtile-0.29.0/lib/python3.12/site-packages"
 ]

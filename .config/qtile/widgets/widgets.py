@@ -65,6 +65,10 @@ main_screen_widgets: list[Widget] = [
         foreground=c.base0C,
         format="%a %b %d  %H:%M:%S",
     ),
+    StatusNotifier(
+        icon_size=22,
+        padding=4,
+    ),
     Systray(
         icon_size=22,
         padding=4,
@@ -88,10 +92,6 @@ sec_screen_widgets: list[Widget] = [
     Clock(
         foreground=c.base0C,
         format="%a %b %d  %H:%M:%S",
-    ),
-    StatusNotifier(
-        icon_size=22,
-        padding=4,
     ),
     basic_sep,
 ]
