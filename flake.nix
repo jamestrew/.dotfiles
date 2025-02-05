@@ -38,8 +38,5 @@
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
       };
-
-      system = system;
-      pkgs = pkgs;
     };
 }

@@ -175,3 +175,4 @@ cython_debug/
 
 .config/discord/*
 !.config/discord/settings.json
+.direnv
