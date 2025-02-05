@@ -43,6 +43,10 @@
 # │                                                          │
 # │                                                          │
 # ╰──────────────────────────────────────────────────────────╯
+#
+set +o errexit
+set +o nounset
+set +o pipefail
 
 not_in_tmux() {
     [ -z "$TMUX" ]

@@ -134,7 +134,6 @@
     zathura
     xclip
     xsel
-    flameshot
     nodePackages.npm
     nodePackages.nodejs
     yarn

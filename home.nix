@@ -17,7 +17,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -31,16 +31,30 @@
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
-    (pkgs.writeShellScriptBin "my-hello" ''
-      echo "Hello, ${config.home.username}!"
-    '')
+    # (pkgs.writeShellScriptBin "my-hello" ''
+    #   echo "Hello, ${config.home.username}!"
+    # '')
 
-    (pkgs.writeShellApplication {
+    (writeShellApplication {
       name = "ta";
-      runtimeInputs = [ pkgs.tmux pkgs.fd ];
-      text = builtins.readFile ./bin/ta;
+      runtimeInputs = [
+        tmux
+        fd
+      ];
+      text = builtins.readFile ./.local/bin/ta;
     })
   ];
+
+  services.flameshot = {
+    enable = true;
+  };
+  # https://github.com/nix-community/home-manager/issues/2064#issuecomment-887300055
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
