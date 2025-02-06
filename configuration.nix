@@ -205,7 +205,12 @@
   programs = {
     zsh = {
       enable = true;
-      autosuggestions.enable = true;
+      autosuggestions = {
+        enable = true;
+        extraConfig = {
+          "ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE" = "fg=blue";
+        };
+      };
       syntaxHighlighting.enable = true;
       ohMyZsh.enable = true;
     };

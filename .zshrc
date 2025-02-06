@@ -10,7 +10,7 @@ source $ZSH/oh-my-zsh.sh
 alias cat="bat"
 alias ll="ls -lah"
 
-# eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(starship init zsh)"
 
 gch() {
