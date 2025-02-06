@@ -10,6 +10,7 @@ picom --experimental-backends &
 # clipmenud &
 # nitrogen --restore &
 discord &
+youtube-music &
 # obsidian &
 ghostty &
 firefox &

@@ -21,6 +21,7 @@
           lolcat
           python3Packages.qtile
           python3Packages.qtile-extras
+          python3Packages.python-dateutil
           basedpyright
           ruff
         ];

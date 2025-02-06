@@ -75,7 +75,12 @@
 
     windowManager.qtile = {
       enable = true;
-      extraPackages = python3Packages: with python3Packages; [ qtile-extras ];
+      extraPackages =
+        python3Packages: with python3Packages; [
+          qtile-extras
+          dateutil
+          dbus-next
+        ];
     };
   };
 
@@ -98,7 +103,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    lolcat
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     nix-index
@@ -115,6 +119,7 @@
     tree
     sqlite
     nh
+    tldr
 
     gcc
     clang
@@ -142,9 +147,10 @@
     vial
 
     picom
-    psutils
     pavucontrol
-    alsa-utils
+    alsa-utils # amixer
+    youtube-music
+    khal
 
     gimp
     go

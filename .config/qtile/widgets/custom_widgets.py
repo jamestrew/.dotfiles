@@ -1,6 +1,9 @@
+import subprocess
+
 from libqtile import bar, qtile
 from libqtile.log_utils import logger
-from libqtile.widget.base import _TextBox
+from libqtile.widget.base import InLoopPollText, _TextBox
+from libqtile.widget.clock import Clock
 from libqtile.widget.cpu import CPU
 from libqtile.widget.groupbox import GroupBox
 from libqtile.widget.memory import Memory
@@ -11,17 +14,20 @@ from libqtile.widget.open_weather import (
 )
 from libqtile.widget.pulse_volume import PulseVolume
 from libqtile.widget.sep import Sep
+from qtile_extras.widget.mixins import ExtendedPopupMixin
 
 from colors import OneDark as c
 
 __all__ = [
-    "group_box",
-    "weather",
-    "line_sep",
-    "basic_sep",
-    "cpu",
-    "ram",
     "audio",
+    "basic_sep",
+    "clock",
+    "cpu",
+    "group_box",
+    "line_sep",
+    "music_player",
+    "ram",
+    "weather",
 ]
 
 
@@ -111,12 +117,15 @@ ram = (
 )
 
 speaker_on = True
+volume_app = "pavucontrol"
+channel = "Master"
+mixer = "amixer"
 
 
 def toggle_speaker():
     global speaker_on
     logger.debug(f"toggle_speaker: {speaker_on=}")
-    qtile.spawn("amixer set PCM toggle")
+    qtile.spawn(f"{mixer} set {channel} toggle")
     speaker_on = not speaker_on
 
 
@@ -125,14 +134,17 @@ audio = (
         foreground=c.base0D,
         mouse_callbacks={
             "Button1": toggle_speaker,
-            "Button3": lambda: qtile.spawn("pavucontrol"),
-            "Button4": lambda: qtile.spawn("amixer set PCM 1%+ unmute"),
-            "Button5": lambda: qtile.spawn("amixer set PCM 1%- unmute"),
+            "Button3": lambda: qtile.spawn(volume_app),
+            "Button4": lambda: qtile.spawn(f"{mixer} set {channel} 1%+ unmute"),
+            "Button5": lambda: qtile.spawn(f"{mixer} set {channel} 1%- unmute"),
         },
         text="󰕾" if speaker_on else "󰖁",
     ),
     PulseVolume(
-        foreground=c.base0D, update_interval=0.1, volume_app="pavucontrol", step=1
+        foreground=c.base0D,
+        update_interval=0.1,
+        volume_app=volume_app,
+        step=1,
     ),
 )
 
@@ -142,3 +154,68 @@ weather = CustomWeather(
     fontsize=16,
     foreground=c.base0E,
 )
+
+
+class MusicPlayer(InLoopPollText):
+    player = "chromium"  # youtube music
+
+    def __init__(self, width=bar.CALCULATED, **config):
+        super().__init__(width=width, **config)
+        self.update_interval = 3
+        self.add_callbacks(
+            {
+                "Button1": lambda: qtile.cmd_spawn(
+                    f"playerctl -p {self.player} play-pause"
+                )
+            }
+        )
+
+    def track_name(self) -> str:
+        try:
+            artist = (
+                subprocess.check_output(
+                    ["playerctl", "--player", self.player, "metadata", "artist"]
+                )
+                .strip()
+                .decode("utf-8")
+            )
+            song = (
+                subprocess.check_output(
+                    ["playerctl", "--player", self.player, "metadata", "title"]
+                )
+                .strip()
+                .decode("utf-8")[:60]
+            )
+            return f"{artist} · {song}"
+        except subprocess.CalledProcessError:
+            return ""
+
+    def poll(self):  # type: ignore
+        return self.track_name()
+
+
+music_player = (Icon(foreground=c.base08, text="󰝚"), MusicPlayer(foreground=c.base08))
+
+
+class CustomClock(Clock, ExtendedPopupMixin):
+    def __init__(self, **config):
+        Clock.__init__(self, **config)
+        ExtendedPopupMixin.__init__(self, **config)
+        self.add_defaults(Clock.defaults)
+        self.add_defaults(ExtendedPopupMixin.defaults)
+
+    #     self.add_callbacks(
+    #         {
+    #             "Button1": self.show_popup,
+    #         }
+    #     )
+
+    # def _update_popup(self):
+
+    #     self.extended_popup.update_controls()
+
+    # def show_popup(self):
+    #     self._update_popup()
+
+
+clock = CustomClock(foreground=c.base0C, format="%a %b %d  %H:%M:%S")
