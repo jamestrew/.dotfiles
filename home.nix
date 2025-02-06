@@ -45,9 +45,13 @@
     })
   ];
 
-  services.flameshot = {
+  services.redshift = {
     enable = true;
+    latitude = 43.660193;
+    longitude = -79.360663;
+    tray = true;
   };
+  services.flameshot.enable = true;
   # https://github.com/nix-community/home-manager/issues/2064#issuecomment-887300055
   systemd.user.targets.tray = {
     Unit = {

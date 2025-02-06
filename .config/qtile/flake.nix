@@ -18,7 +18,6 @@
       devShells.${system}.default = pkgs.mkShell {
         name = "qtile-dev-shell";
         buildInputs = with pkgs; [
-          lolcat
           python3Packages.qtile
           python3Packages.qtile-extras
           python3Packages.python-dateutil

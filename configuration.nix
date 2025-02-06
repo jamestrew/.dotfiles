@@ -151,6 +151,7 @@
     alsa-utils # amixer
     youtube-music
     khal
+    dunst
 
     gimp
     go
@@ -218,6 +219,8 @@
     direnv.enable = true;
 
     steam.enable = true;
+
+    gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
   };
 
   virtualisation.docker.enable = true;

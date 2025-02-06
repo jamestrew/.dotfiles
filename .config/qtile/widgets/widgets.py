@@ -6,9 +6,10 @@ from libqtile.widget.clock import Clock
 from libqtile.widget.currentlayout import CurrentLayout
 from libqtile.widget.khal_calendar import KhalCalendar
 from libqtile.widget.pomodoro import Pomodoro
-from libqtile.widget.statusnotifier import StatusNotifier
+# from libqtile.widget.statusnotifier import StatusNotifier
 from libqtile.widget.systray import Systray
 from libqtile.widget.windowname import WindowName
+from qtile_extras.widget.statusnotifier import StatusNotifier
 
 from colors import OneDark as c
 from widgets.custom_widgets import (
@@ -46,6 +47,7 @@ main_screen_widgets: list[Widget] = [
         max_chars=75,
     ),
     Pomodoro(
+        length_pomodori=1,
         color_inactive=c.base02,
         color_active=c.base0D,
         color_break=c.base0B,
