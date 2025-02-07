@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
-
+let
+  cursor = {
+    name = "Bibata-Modern-Classic";
+    package = pkgs.bibata-cursors;
+    size = 22;
+  };
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -58,6 +64,17 @@
       Description = "Home Manager System Tray";
       Requires = [ "graphical-session-pre.target" ];
     };
+  };
+
+  gtk = {
+    enable = true;
+    cursorTheme = cursor;
+  };
+
+  home.pointerCursor = {
+    x11.enable = true;
+    gtk.enable = true;
+    inherit (cursor) name package size;
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
