@@ -4,10 +4,7 @@ from libqtile.widget.base import (
 )
 from libqtile.widget.clock import Clock
 from libqtile.widget.currentlayout import CurrentLayout
-from libqtile.widget.khal_calendar import KhalCalendar
 from libqtile.widget.pomodoro import Pomodoro
-# from libqtile.widget.statusnotifier import StatusNotifier
-from libqtile.widget.systray import Systray
 from libqtile.widget.windowname import WindowName
 from qtile_extras.widget.statusnotifier import StatusNotifier
 
@@ -69,7 +66,7 @@ main_screen_widgets: list[Widget] = [
     line_sep,
     Clock(foreground=c.base0C, format="%a %b %d  %H:%M:%S"),
     StatusNotifier(icon_size=22, padding=4),
-    Systray(icon_size=22, padding=4),
+    # Systray(icon_size=22, padding=4),
     basic_sep,
 ]
 

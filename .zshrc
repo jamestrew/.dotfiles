@@ -4,7 +4,7 @@ export CDPATH=$HOME/.local/share/nvim/:$CDPATH
 export EDITOR='nvim'
 
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 
 alias cat="bat"

@@ -14,3 +14,5 @@ youtube-music &
 # obsidian &
 ghostty &
 firefox &
+fcitx5 &
+

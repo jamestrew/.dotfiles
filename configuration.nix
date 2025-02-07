@@ -62,7 +62,15 @@
   time.timeZone = "America/Toronto";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_CA.UTF-8";
+  i18n = {
+    defaultLocale = "en_CA.UTF-8";
+    # enabling en/jp inputs
+    inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5.addons = [ pkgs.fcitx5-mozc ];
+    };
+  };
 
   services.xserver = {
     enable = true;
@@ -192,7 +200,29 @@
     packages = with pkgs; [
       jetbrains-mono
       nerd-fonts.jetbrains-mono
+
+      # japanese "Source Han Sans"
+      source-han-sans
     ];
+
+    fontconfig = {
+      defaultFonts = {
+        # "DejaVu *" looks to be the nixos default
+        # setting "Source Han Sans" as fallback for japanese
+        serif = [
+          "DejaVu Serif"
+          "Source Han Sans"
+        ];
+        sansSerif = [
+          "DejaVu Sans"
+          "Source Han Sans"
+        ];
+        monospace = [
+          "JetBrains Mono"
+          "Source Han Sans"
+        ];
+      };
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
