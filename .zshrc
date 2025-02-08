@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.local/share/nvim/mason/bin:$HOME/apps/neovim/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/apps/neovim/bin:$PATH
 export CDPATH=$HOME/.local/share/nvim/:$CDPATH
 export EDITOR='nvim'
 

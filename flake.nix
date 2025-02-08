@@ -13,7 +13,7 @@
       nixpkgs,
       home-manager,
       ...
-    }:
+    }@inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -24,6 +24,7 @@
       nixosConfigurations = {
         ${host} = lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [ ./configuration.nix ];
         };
       };
