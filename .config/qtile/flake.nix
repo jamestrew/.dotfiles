@@ -21,8 +21,6 @@
           python3Packages.qtile
           python3Packages.qtile-extras
           python3Packages.python-dateutil
-          basedpyright
-          ruff
         ];
         shellHook = ''
           echo "Welcome to the qtile dev shell" | lolcat

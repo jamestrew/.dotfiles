@@ -88,7 +88,6 @@
 
     windowManager.qtile = {
       enable = true;
-      package = pkgs.stable.qtile;
       extraPackages =
         python3Packages: with python3Packages; [
           qtile-extras
