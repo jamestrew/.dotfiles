@@ -88,6 +88,7 @@
 
     windowManager.qtile = {
       enable = true;
+      package = pkgs.stable.qtile;
       extraPackages =
         python3Packages: with python3Packages; [
           qtile-extras
@@ -112,7 +113,17 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    overlays = [
+      (final: _: {
+        stable = import inputs.nixpkgs-stable {
+          inherit (final.stdenv.hostPlatform) system;
+          inherit (final) config;
+        };
+      })
+    ];
+    config.allowUnfree = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -165,7 +176,6 @@
     pavucontrol
     alsa-utils # amixer
     youtube-music
-    khal
     dunst
 
     gimp
@@ -185,7 +195,7 @@
     stylua
     nil # nix language server
     nixfmt-rfc-style
-    basedpyright
+    stable.basedpyright # https://github.com/NixOS/nixpkgs/issues/380079
     gopls
     libclang
     deno
