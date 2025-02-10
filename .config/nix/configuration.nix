@@ -170,6 +170,7 @@
     openssh
     stow
     vial
+    unzip
 
     picom
     pavucontrol
@@ -209,7 +210,7 @@
   environment.variables = {
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
     CM_LAUNCHER = "rofi";
-    FLAKE = "/home/jt/.dotfiles";
+    FLAKE = "$HOME.dotfiles/.config/nixos";
     STEAM_EXTRA_COMPAT_TOOLS_PATH = "~/.steam/root/compatibilitytools.d";
   };
 
