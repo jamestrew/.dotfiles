@@ -55,6 +55,7 @@ in
     enable = true;
     latitude = 43.660193;
     longitude = -79.360663;
+    temperature.night = 3000;
     tray = true;
   };
   services.flameshot.enable = true;
