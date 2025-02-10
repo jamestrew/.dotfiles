@@ -11,7 +11,7 @@ groups = [
             Match(wm_class="com.github.th_ch.youtube_music"),
         ],
     ),
-    Group("sys", layout="cols"),
+    Group("fun", layout="cols", matches=[Match(wm_class="steam")]),
     Group("doc", layout="cols"),
     Group("dev", layout="cols"),
     Group("dev2", layout="cols"),

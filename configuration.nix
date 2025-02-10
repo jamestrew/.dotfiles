@@ -188,6 +188,7 @@
     docker
     screenkey
     peek
+    protonup  # steam proton thing, get STEAM_EXTRA_COMPAT_TOOLS_PATH env var and run `protonup`
 
     lua-language-server
     bash-language-server
@@ -209,6 +210,7 @@
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
     CM_LAUNCHER = "rofi";
     FLAKE = "/home/jt/.dotfiles";
+    STEAM_EXTRA_COMPAT_TOOLS_PATH = "~/.steam/root/compatibilitytools.d";
   };
 
   fonts = {
