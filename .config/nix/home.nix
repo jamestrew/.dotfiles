@@ -40,21 +40,11 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-
-    (writeShellApplication {
-      name = "ta";
-      runtimeInputs = [
-        tmux
-        fd
-      ];
-      text = builtins.readFile ./.local/bin/ta;
-    })
   ];
 
   services.redshift = {
     enable = true;
-    latitude = 43.660193;
-    longitude = -79.360663;
+    provider = "geoclue2";
     temperature.night = 3000;
     tray = true;
   };

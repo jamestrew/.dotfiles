@@ -13,6 +13,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./modules/qtile.nix
   ];
 
   # Bootloader.
@@ -85,17 +86,6 @@
       layout = "us";
       variant = "";
     };
-
-    windowManager.qtile = {
-      enable = true;
-      extraPackages =
-        python3Packages: with python3Packages; [
-          qtile-extras
-          dateutil
-          dbus-next
-          pyxdg
-        ];
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -155,6 +145,7 @@
     ccache
 
     discord
+    youtube-music
     fzf
     yazi
     vlc
@@ -172,12 +163,6 @@
     vial
     unzip
 
-    picom
-    pavucontrol
-    alsa-utils # amixer
-    youtube-music
-    dunst
-
     gimp
     go
     ruff
@@ -185,7 +170,6 @@
     delta
     starship
     atuin
-    rofi
     docker
     screenkey
     peek
@@ -209,8 +193,7 @@
 
   environment.variables = {
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
-    CM_LAUNCHER = "rofi";
-    FLAKE = "$HOME.dotfiles/.config/nixos";
+    FLAKE = "$HOME/.dotfiles/.config/nixos";
     STEAM_EXTRA_COMPAT_TOOLS_PATH = "~/.steam/root/compatibilitytools.d";
   };
 
@@ -268,14 +251,11 @@
     direnv.enable = true;
 
     steam.enable = true;
-
-    gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
   };
 
   virtualisation.docker.enable = true;
 
   # List services that you want to enable:
-  services.clipmenu.enable = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -283,7 +263,6 @@
     vial
     via
   ];
-  services.playerctld.enable = true;
   services.input-remapper.enable = true;
 
   fileSystems = {
