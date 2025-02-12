@@ -193,7 +193,7 @@
 
   environment.variables = {
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
-    FLAKE = "$HOME/.dotfiles/.config/nixos";
+    FLAKE = "$HOME/.dotfiles/.config/nix";
     STEAM_EXTRA_COMPAT_TOOLS_PATH = "~/.steam/root/compatibilitytools.d";
   };
 
