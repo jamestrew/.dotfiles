@@ -10,10 +10,14 @@
 }:
 
 {
+  nixosConfig.enable = true;
+
   imports = [
     # Include the results of the hardware scan.
+    ./base.nix
     ./hardware-configuration.nix
     ./modules/qtile.nix
+    ./modules/sh.nix
   ];
 
   # Bootloader.
@@ -98,7 +102,7 @@
       "docker"
     ];
     packages = with pkgs; [ ];
-    shell = pkgs.zsh;
+    # shell = pkgs.fish;
   };
 
   # Allow unfree packages
@@ -127,6 +131,8 @@
     github-cli
     tmux
     rustup
+    bacon
+    hyperfine
     bat
     ripgrep
     fd
@@ -169,11 +175,10 @@
     uv
     delta
     starship
-    atuin
     docker
     screenkey
     peek
-    protonup  # steam proton thing, get STEAM_EXTRA_COMPAT_TOOLS_PATH env var and run `protonup`
+    protonup # steam proton thing, get STEAM_EXTRA_COMPAT_TOOLS_PATH env var and run `protonup`
 
     lua-language-server
     bash-language-server
@@ -237,7 +242,7 @@
 
   programs = {
     zsh = {
-      enable = true;
+      enable = false;
       autosuggestions = {
         enable = true;
         extraConfig = {
@@ -247,6 +252,17 @@
       syntaxHighlighting.enable = true;
       ohMyZsh.enable = true;
     };
+
+    # for fish: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
+    # bash = {
+    #   interactiveShellInit = ''
+    #     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+    #     then
+    #       shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+    #       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+    #     fi
+    #   '';
+    # };
 
     direnv.enable = true;
 
@@ -304,4 +320,5 @@
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 30d";
   nix.settings.auto-optimise-store = true;
+
 }
