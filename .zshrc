@@ -9,9 +9,5 @@ alias ll="ls -lah"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(starship init zsh)"
 
-gch() {
- git checkout "$(git branch --all | fzf| tr -d '[:space:]')"
-}
-
 source ~/.secrets # find a better way, git-crypt maybe?
 ta

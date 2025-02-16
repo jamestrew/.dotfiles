@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  osConfig,
+  pkgs,
+  ...
+}:
 let
   cursor = {
     name = "Bibata-Modern-Classic";
@@ -7,10 +12,6 @@ let
   };
 in
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./modules/sh.nix
-  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -49,8 +50,11 @@ in
 
   services.redshift = {
     enable = true;
-    provider = "geoclue2";
     temperature.night = 3000;
+    latitude = 43.66;
+    longitude = -79.38;
+    settings.redshift.brightness-day = "1";
+    settings.redshift.brightness-night = "0.85";
     tray = true;
   };
   services.flameshot.enable = true;

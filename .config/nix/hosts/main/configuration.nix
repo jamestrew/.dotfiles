@@ -10,15 +10,14 @@
 }:
 
 {
-  nixosConfig.enable = true;
-
   imports = [
     # Include the results of the hardware scan.
-    ./base.nix
     ./hardware-configuration.nix
-    ./modules/qtile.nix
-    ./modules/sh.nix
   ];
+
+  # my modules
+  qtile.enable = true;
+  gaming.enable = true;
 
   # Bootloader.
   boot.loader.grub = {
@@ -101,106 +100,17 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [ ];
-    # shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
 
-  # Allow unfree packages
-  nixpkgs = {
-    overlays = [
-      (final: _: {
-        stable = import inputs.nixpkgs-stable {
-          inherit (final.stdenv.hostPlatform) system;
-          inherit (final) config;
-        };
-      })
-    ];
-    config.allowUnfree = true;
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    nix-index
-    curl
-    firefox
-    google-chrome # sometimes firefox is doodoo
-    git
-    github-cli
-    tmux
-    rustup
-    bacon
-    hyperfine
-    bat
-    ripgrep
-    fd
-    tree
-    sqlite
-    nh
-    tldr
-    jq
-
-    gcc
-    clang
-    gnumake
-    cmake
-    gettext
-    ninja
-    ccache
-
-    discord
-    youtube-music
-    fzf
-    yazi
-    vlc
-    htop
-    ghostty
-    kitty
-    zathura
-    xclip
-    xsel
-    nodePackages.npm
-    nodePackages.nodejs
-    yarn
-    openssh
-    stow
-    vial
-    unzip
-
-    gimp
-    go
-    ruff
-    uv
-    delta
-    starship
-    docker
-    screenkey
-    peek
-    protonup # steam proton thing, get STEAM_EXTRA_COMPAT_TOOLS_PATH env var and run `protonup`
-
-    lua-language-server
-    bash-language-server
-    stylua
-    nil # nix language server
-    nixfmt-rfc-style
-    stable.basedpyright # https://github.com/NixOS/nixpkgs/issues/380079
-    gopls
-    libclang
-    deno
-    emmet-language-server
-    markdownlint-cli
-    taplo
-    biome
-    vscode-langservers-extracted
-  ];
-
-  environment.variables = {
-    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
-    FLAKE = "$HOME/.dotfiles/.config/nix";
-    STEAM_EXTRA_COMPAT_TOOLS_PATH = "~/.steam/root/compatibilitytools.d";
-  };
+  environment.variables =
+    let
+      FLAKE = "$HOME/.dotfiles/.config/nix";
+    in
+    {
+      inherit FLAKE;
+      NH_FLAKE = FLAKE;
+    };
 
   fonts = {
     enableDefaultPackages = true;
@@ -241,8 +151,10 @@
   # };
 
   programs = {
+    dconf.enable = true;
+
     zsh = {
-      enable = false;
+      enable = true;
       autosuggestions = {
         enable = true;
         extraConfig = {
@@ -253,33 +165,51 @@
       ohMyZsh.enable = true;
     };
 
+    fish = {
+      enable = false;
+      interactiveShellInit = ''
+        set fish_greeting
+        set -gx PATH $HOME/.local/bin $HOME/.cargo/bin $HOME/go/bin $HOME/apps/neovim/bin $PATH
+        set -gx CDPATH $HOME/.local/share/nvim/ $CDPATH
+        set -gx EDITOR nvim
+
+        alias cat='bat'
+        alias ll='ls -lah'
+
+        starship init fish | source
+        atuin init fish --disable-up-arrow | source
+
+        source ~/.secrets
+
+        set -g fish_color_autosuggestion 555
+
+        ta
+      '';
+    };
+
     # for fish: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
-    # bash = {
-    #   interactiveShellInit = ''
-    #     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-    #     then
-    #       shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-    #       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-    #     fi
-    #   '';
-    # };
+    bash = {
+      interactiveShellInit = ''
+        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+        then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        fi
+      '';
+    };
 
     direnv.enable = true;
-
-    steam.enable = true;
   };
 
   virtualisation.docker.enable = true;
 
   # List services that you want to enable:
-  services.devmon.enable = true;
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
-  services.udev.packages = with pkgs; [
-    vial
-    via
-  ];
-  services.input-remapper.enable = true;
+  services = {
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
+    input-remapper.enable = true; # mapping mouse buttons
+  };
 
   fileSystems = {
     "/mnt/moreswag" = {
@@ -307,18 +237,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.dates = "weekly";
-
-  nix.gc.automatic = true;
-  nix.gc.dates = "weekly";
-  nix.gc.options = "--delete-older-than 30d";
-  nix.settings.auto-optimise-store = true;
-
 }
