@@ -11,6 +11,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # nh fork that supports nix-darwin
     nh = {
@@ -51,7 +55,6 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
-
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.jt = {
@@ -66,16 +69,5 @@
             }
           ];
         };
-
-      # homeConfigurations.jt = home-manager.lib.homeManagerConfiguration {
-      #   inherit pkgs;
-
-      #   # Specify your home configuration modules here, for example,
-      #   # the path to your home.nix.
-      #   modules = [ ./home.nix ];
-
-      #   # Optionally use extraSpecialArgs
-      #   # to pass through arguments to home.nix
-      # };
     };
 }

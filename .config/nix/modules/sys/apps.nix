@@ -10,7 +10,6 @@
     git
     github-cli
     tmux
-    rustup
     bacon
     hyperfine
     bat
@@ -22,6 +21,15 @@
     tldr
     jq
     sops
+
+    (fenix.complete.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
+    rust-analyzer-nightly
 
     gcc
     clang

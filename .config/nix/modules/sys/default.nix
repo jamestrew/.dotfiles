@@ -11,6 +11,8 @@
 
   nixpkgs = {
     overlays = [
+      inputs.fenix.overlays.default
+
       (final: _: {
         stable = import inputs.nixpkgs-stable {
           inherit (final.stdenv.hostPlatform) system;
