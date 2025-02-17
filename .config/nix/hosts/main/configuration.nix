@@ -100,6 +100,7 @@
       "wheel"
       "docker"
     ];
+    packages = [ ];
     shell = pkgs.zsh;
   };
 
@@ -162,41 +163,40 @@
         };
       };
       syntaxHighlighting.enable = true;
-      ohMyZsh.enable = true;
     };
 
-    fish = {
-      enable = false;
-      interactiveShellInit = ''
-        set fish_greeting
-        set -gx PATH $HOME/.local/bin $HOME/.cargo/bin $HOME/go/bin $HOME/apps/neovim/bin $PATH
-        set -gx CDPATH $HOME/.local/share/nvim/ $CDPATH
-        set -gx EDITOR nvim
+    # fish = {
+    #   enable = false;
+    #   interactiveShellInit = ''
+    #     set fish_greeting
+    #     set -gx PATH $HOME/.local/bin $HOME/.cargo/bin $HOME/go/bin $HOME/apps/neovim/bin $PATH
+    #     set -gx CDPATH $HOME/.local/share/nvim/ $CDPATH
+    #     set -gx EDITOR nvim
 
-        alias cat='bat'
-        alias ll='ls -lah'
+    #     alias cat='bat'
+    #     alias ll='ls -lah'
 
-        starship init fish | source
-        atuin init fish --disable-up-arrow | source
+    #     starship init fish | source
+    #     atuin init fish --disable-up-arrow | source
 
-        source ~/.secrets
+    #     source ~/.secrets
 
-        set -g fish_color_autosuggestion 555
+    #     set -g fish_color_autosuggestion 555
 
-        ta
-      '';
-    };
+    #     ta
+    #   '';
+    # };
 
     # for fish: https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
-    bash = {
-      interactiveShellInit = ''
-        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-        then
-          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-        fi
-      '';
-    };
+    # bash = {
+    #   interactiveShellInit = ''
+    #     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+    #     then
+    #       shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+    #       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+    #     fi
+    #   '';
+    # };
 
     direnv.enable = true;
   };

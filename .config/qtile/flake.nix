@@ -5,7 +5,7 @@
   # qtile path is different from the base nixos qtile path
   # should really study up on how to do shit like this
   inputs = {
-    main-flake.url = "path:../..";
+    main-flake.url = "path:../nix";
   };
 
   outputs =

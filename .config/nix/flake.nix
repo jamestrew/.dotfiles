@@ -46,7 +46,7 @@
           };
           modules = [
             ./hosts/main/configuration.nix
-            ./modules
+            ./modules/sys
 
             home-manager.nixosModules.home-manager
             {
@@ -55,7 +55,10 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.jt = {
-                  imports = [ ./hosts/home.nix ];
+                  imports = [
+                    ./hosts/home.nix
+                    ./modules/home
+                  ];
                 };
                 extraSpecialArgs = { inherit pkgs; };
                 sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];

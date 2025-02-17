@@ -24,18 +24,41 @@
     "main-flake": {
       "inputs": {
         "home-manager": "home-manager",
+        "nh": "nh",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-stable": "nixpkgs-stable"
+        "nixpkgs-stable": "nixpkgs-stable",
+        "sops-nix": "sops-nix"
       },
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-DND6bSoF664yroyB1MJZpYRwglmKlJ1XlgmLt14dqOo=",
-        "path": "../..",
+        "lastModified": 1,
+        "narHash": "sha256-cBsxovKt4gYpOyZwIbH8eqKVY7I9QUT7ftItNGGBn4g=",
+        "path": "../nix",
         "type": "path"
       },
       "original": {
-        "path": "../..",
+        "path": "../nix",
         "type": "path"
+      }
+    },
+    "nh": {
+      "inputs": {
+        "nixpkgs": [
+          "main-flake",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739410909,
+        "narHash": "sha256-wx0oBgnmh6K8PJGyASLAErnrIe8/1hZthVrkfoX+j/E=",
+        "owner": "ToyVo",
+        "repo": "nh",
+        "rev": "10c8d19efd0ed9f63708d1179468fbb2f2bd7f4e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ToyVo",
+        "repo": "nh",
+        "type": "github"
       }
     },
     "nixpkgs": {
@@ -71,6 +94,27 @@
     "root": {
       "inputs": {
         "main-flake": "main-flake"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "main-flake",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739262228,
+        "narHash": "sha256-7JAGezJ0Dn5qIyA2+T4Dt/xQgAbhCglh6lzCekTVMeU=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "07af005bb7d60c7f118d9d9f5530485da5d1e975",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     }
   },

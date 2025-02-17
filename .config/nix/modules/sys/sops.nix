@@ -16,7 +16,7 @@
   ];
 
   sops = {
-    defaultSopsFile = ../secrets/secrets.json;
+    defaultSopsFile = ../../secrets/secrets.json;
     defaultSopsFormat = "json";
     age.keyFile = "/home/jt/.config/sops/age/keys.txt";
 
